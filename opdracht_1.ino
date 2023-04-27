@@ -1,18 +1,32 @@
 // C++ code
 //
-void setup(){
+  	int ledPin = 0;
+	const int potPin = A5;
+	int potRead = 0;
+	int ledAantal = 0;
+	int mappedpotRead = 0;
 
-    pinMode(11, OUTPUT);
-    pinMode(12, OUTPUT);
-  
+void setup()
+{
+  for (int ledPin = 0; ledPin < 7; ledPin++){
+    pinMode(ledPin, OUTPUT);
+  }
+  pinMode(potPin, INPUT);
+ 
 }
 
 void loop()
 {
-  digitalWrite(11, HIGH);
-  delay(1000);
-  digitalWrite(11,LOW);
-  digitalWrite(12, HIGH);
-  delay(1000);
-  digitalWrite(12,LOW);
+
+potRead = analogRead(potPin); 
+  mappedpotRead = map(potRead, 0, 1023, 0, 7);
+    
+    for (int ledAantal = 0; ledAantal < 7; ledAantal++ ){
+  ledPin = ledAantal;
+      if (ledPin < mappedpotRead ){
+  digitalWrite(ledPin, HIGH);
+      }
+      else {
+        digitalWrite(ledPin, LOW);}
+}
 }
